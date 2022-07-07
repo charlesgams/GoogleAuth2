@@ -6,7 +6,7 @@ const fillTask = async (taskList, accessToken) => {
   let Tasks = [];
 
   return await new Promise((resolve, reject) => {
-    taskList.forEach(async (list) => {
+    taskList.forEach(async (list, index) => {
       const listTasks = await axios
         .get(
           `https://tasks.googleapis.com/tasks/v1/lists/${list.id}/tasks?fields=items.id,items.title,items.notes`
@@ -15,6 +15,7 @@ const fillTask = async (taskList, accessToken) => {
         .catch((err) => err);
 
       Tasks.push({
+        index,
         listId: list.id,
         listName: list.title,
         items: listTasks.data.items,

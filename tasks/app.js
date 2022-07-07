@@ -23,7 +23,6 @@ app.post("/getTasks", async (req, res) => {
   if (!(response.data && response.data.items)) return res.json([]);
 
   const Tasks = await fillTask(response.data.items, req.body.token);
-  console.log(Tasks);
 
   Tasks.sort((a, b) => a.index - b.index);
 

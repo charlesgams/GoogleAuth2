@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import { useEffect, useContext, useState } from "react";
-import { Col, Container, Row } from "@nextui-org/react";
+import { Col, Container, Row, Spacer } from "@nextui-org/react";
 import { UserContext } from "../utils/auth";
 import { Head } from "next/document";
 
@@ -37,21 +37,21 @@ export default function Mail() {
 
   return (
     <Layout>
-      {mails &&
-        mails.map((mail, index) => {
-          return (
-            <Container>
-              <Row key={index}>
-                <Row>
-                  <Col>{mail.from}</Col>
+      <Container>
+        {mails &&
+          mails.map((mail, index) => {
+            return (
+              <>
+                <Spacer y={6} />
+                <Row key={index}>
+                  <Col span={4}>{mail.from.split("<")[0].trim()}</Col>
                   <Col>{mail.subject}</Col>
+                  <Col>{mail.snippet}</Col>
                 </Row>
-
-                <Col>{mail.snippet}</Col>
-              </Row>
-            </Container>
-          );
-        })}
+              </>
+            );
+          })}
+      </Container>
     </Layout>
   );
 }
